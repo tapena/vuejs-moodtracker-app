@@ -3,12 +3,19 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <a href="/#/signup">Signup</a>
+      <a href="/#/logout">Logout</a>
     </div>
     <router-view/>
   </div>
 </template>
 
 <style>
+
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <!-- Navbar content -->
+</nav>
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -29,3 +36,4 @@
   color: #42b983;
 }
 </style>
+
