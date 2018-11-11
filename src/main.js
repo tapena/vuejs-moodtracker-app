@@ -8,6 +8,10 @@ if (jwt) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
 }
 
+axios.defaults.baseURL = 
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+
+
 Vue.config.productionTip = false;
 
 new Vue({
