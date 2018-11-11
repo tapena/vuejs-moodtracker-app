@@ -5,12 +5,12 @@
   <div>
     Title: <input v-model="newJournal.title">
     Content: <input v-model="newJournal.content">
-    <button v-on:click="addJournal()">Add content</button>
+    <button class="btn btn-warning" v-on:click="addJournal()">Add content</button>
   </div>
   
   <div v-for="journal in journals">
     <h5>{{ journal.title }}</h5>
-<!--     <h3>{{ journal.time.now }}</h3> -->
+    <!-- <h3>{{ journal.time.now }}</h3> -->
     <p>{{ journal.content }}</p>
   </div>
 </div>

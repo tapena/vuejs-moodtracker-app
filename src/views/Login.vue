@@ -18,7 +18,7 @@
           <label>Password:</label>
           <input type="password" class="form-control" v-model="password">
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit">
+        <input type="submit" class="btn btn-warning"value="Submit">
       </form>
     </div>
   </div>
@@ -41,7 +41,7 @@ export default {
     submit: function() {
       var params = {
         family_id: this.family_id,
-        password: this.password,
+        password_digest: this.password,
         name: this.name
       };
       axios
@@ -50,7 +50,7 @@ export default {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          this.$router.push("/home");
+          this.$router.push("/mood_trackers");
         })
         .catch(error => {
           this.errors = ["Invalid name or password."];

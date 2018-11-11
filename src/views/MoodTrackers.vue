@@ -1,27 +1,21 @@
 <template>
 <div class="mood_trackers">
-<h1>Mood Tracker</h1>
   <div>
     Emotion: <input v-model="newMoodTracker.emotion">
-    Proud Message: <input v-model="newMoodTracker.proud_message">
-    <button v-on:click="addMoodTracker()">Add</button>
+    Because: <input v-model="newMoodTracker.proud_message">
+    <button class="btn btn-warning" v-on:click="addMoodTracker()">Add</button>
   </div>
-
-<!--   <img class="ribbon" src="https://mbtskoudsalg.com/images/badge-png-transparent-1.png"> -->
   
   <div v-for="moodTracker in moodTrackers">
-    <h3>{{ moodTracker.user_name }} is feeling {{ moodTracker.emotion }} 
-   </h3>
-   <h5> Proud Message: {{ moodTracker.proud_message }}</h5> 
+    <h5>{{ moodTracker.user_name }} is feeling {{ moodTracker.emotion }} because {{ moodTracker.proud_message }}
+   </h5>
   </div>
 </div>
 
 </template>
 
 <style>
-/*.ribbon {
-  height: 100px;
-}*/
+
 </style>
 
 <script>
