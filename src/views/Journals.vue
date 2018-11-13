@@ -21,7 +21,6 @@
 
 <script>
 var axios = require('axios');
-
 export default {
   data: function() {
     return {
@@ -59,5 +58,4 @@ export default {
   },
   computed: {}
 };
-
 </script>

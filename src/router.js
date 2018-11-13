@@ -1,7 +1,5 @@
-
 import Vue from 'vue';
 import Router from 'vue-router';
-
 
 import Journals from './views/Journals.vue';
 import MoodTrackers from './views/MoodTrackers.vue';

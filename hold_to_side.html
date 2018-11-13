@@ -1,3 +1,32 @@
+    <nav class="site-navbar fixed-top navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand">Mood</a>
+          <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav ml-auto">
+            <router-link to="/mood_trackers">Mood</router-link> |
+            <router-link to="/journals">Journal</router-link> |
+            <router-link to="/logout">Logout</router-link>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  background-color: LightGray
+}
+#nav {
+  padding: 30px;
+  height:150px;
+}
+
+</style>
+
+
+
 <template>
   <div id="app">
     <nav class="site-navbar fixed-top navbar navbar-expand-lg">
@@ -5,9 +34,9 @@
       <a class="navbar-brand" href="index.html">Mood</a>
         <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav ml-auto">
-          <router-link to="/signup">Signup</router-link> |
-          <router-link to="/login">Login</router-link> |
-          <router-link to="/logout">Logout</router-link>
+         <router-link to="/mood_trackers">Mood</router-link> |
+  <!--       <router-link to="/journals">Journal</router-link> | -->
+        <router-link to="/logout">Logout</router-link>
         </ul>
         </div>
       </div>
@@ -42,3 +71,4 @@
 <style>
 
 </style>
+

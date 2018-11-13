@@ -7,7 +7,7 @@
   </div>
   
   <div v-for="moodTracker in moodTrackers">
-    <h5>{{ moodTracker.user_name }} is feeling {{ moodTracker.emotion }} because {{ moodTracker.proud_message }}
+    <h5>{{ mood_trackers.user_name }} is feeling {{ mood_trackers.emotion }} because {{ mood_trackers.proud_message }}
    </h5>
   </div>
 </div>
@@ -15,12 +15,10 @@
 </template>
 
 <style>
-
 </style>
 
 <script>
 var axios = require('axios');
-
 export default {
   data: function() {
     return {
@@ -59,5 +57,4 @@ export default {
   },
   computed: {}
 };
-
 </script>
