@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+   <!-- <div style="height:150px"></div> -->
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Login</h1>
@@ -25,40 +26,41 @@
 </template>
 
 <script>
+  
 import axios from "axios";
 
 export default {
-  template: "#login-page",
-  data: function() {
-    return {
-      name: "",
-      family_id: "",
-      password: "",
-      errors: []
-    };
-  },
-  methods: {
-    submit: function() {
-      var params = {
-        family_id: this.family_id,
-        password_digest: this.password,
-        name: this.name
+    template: "#login-page",
+    data: function() {
+      return {
+        name: "",
+        family_id: "",
+        password: "",
+        errors: []
       };
-      axios
-        .post("http://localhost:3000/api/sessions", params)
-        .then(response => {
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + response.data.jwt;
-          localStorage.setItem("jwt", response.data.jwt);
-          this.$router.push("/mood_trackers");
-        })
-        .catch(error => {
-          this.errors = ["Invalid name or password."];
-          this.family_id = "";
-          this.password = "";
-          this.name = "";
-        });
+    },
+    methods: {
+      submit: function() {
+        var params = {
+          family_id: this.family_id,
+          password_digest: this.password,
+          name: this.name
+        };
+        axios
+          .post("http://localhost:3000/api/sessions", params)
+          .then(response => {
+            axios.defaults.headers.common["Authorization"] =
+              "Bearer " + response.data.jwt;
+            localStorage.setItem("jwt", response.data.jwt);
+            this.$router.push("mood_trackers");
+          })
+          .catch(error => {
+            this.errors = ["Invalid name or password."];
+            this.family_id = "";
+            this.password = "";
+            this.name = "";
+          });
+      }
     }
-  }
 };
 </script>

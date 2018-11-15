@@ -1,20 +1,82 @@
 <template>
-<div class="mood_trackers">
-  <div>
-    Emotion: <input v-model="newMoodTracker.emotion">
-    Because: <input v-model="newMoodTracker.proud_message">
-    <button class="btn btn-warning" v-on:click="addMoodTracker()">Add</button>
-  </div>
-  
-  <div v-for="moodTracker in moodTrackers">
-    <h5>{{ mood_trackers.user_name }} is feeling {{ mood_trackers.emotion }} because {{ mood_trackers.proud_message }}
-   </h5>
-  </div>
-</div>
+  <div class="mood_trackers">
 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+            <div v-for="moodTracker in moodTrackers" class="mood-item" v-bind:class="{
+              happy: moodTracker.emotion === 'happy', 
+              meh: moodTracker.emotion === 'meh', 
+              angry: moodTracker.emotion === 'angry', 
+              sad: moodTracker.emotion === 'sad', 
+            }">
+              <h5>{{ moodTracker.user_name }} is feeling {{ moodTracker.emotion }} because {{ moodTracker.proud_message }}
+              </h5>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <form class="frm" v-on:submit.prevent="submit()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="success"></div>
+                </div>
+                <div class="col-md-6 row">
+                  
+                </div>
+                <div class="col-md-12 text-center">
+                  <div class="form-group">
+                    <select type="text" class="form-control" name="emotion" v-model="newMoodTracker.emotion">
+                      <option value="" disabled selected>Emotion</option>
+                      <option value="happy">Happy</option>
+                      <option value="meh">Meh</option>
+                      <option value="angry">Angry</option>
+                      <option value="sad">Sad</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <label for="Because">Because</label>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" v-model="newMoodTracker.proud_message" class="form-control" Name="Because" placeholder="Reason">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+
+                  </div>
+                  <input  type="submit" id="submit" name="submit" value="Add Mood Tracker" class="btn btn-lg btn-block btn-action" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <style>
+.happy {
+  background-color: #FCE60C;
+}
+.meh {
+  background-color: #08AF5F;
+}
+.angry {
+  background-color: #fc490c;  
+}
+.sad {
+  background-color: #5C7BC2;
+}
+.mood-item {
+  padding: 5px 5px 5px 20px;
+  margin: 5px 0px;
+  border-radius: 20px;
+  border: solid black 1px;
+}
 </style>
 
 <script>
@@ -39,7 +101,7 @@ export default {
       });
   },
   methods: {
-    addMoodTracker: function() {
+    submit: function() {
       this.errors = [];
       var params = {
         emotion: this.newMoodTracker.emotion,

@@ -1,74 +1,60 @@
-    <nav class="site-navbar fixed-top navbar navbar-expand-lg">
-      <div class="container">
-        <a class="navbar-brand">Mood</a>
-          <div class="collapse navbar-collapse" id="navbar">
-          <ul class="navbar-nav ml-auto">
-            <router-link to="/mood_trackers">Mood</router-link> |
-            <router-link to="/journals">Journal</router-link> |
-            <router-link to="/logout">Logout</router-link>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-  background-color: LightGray
-}
-#nav {
-  padding: 30px;
-  height:150px;
-}
-
-</style>
-
-
-
 <template>
-  <div id="app">
-    <nav class="site-navbar fixed-top navbar navbar-expand-lg">
-      <div class="container">
-      <a class="navbar-brand" href="index.html">Mood</a>
-        <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav ml-auto">
-         <router-link to="/mood_trackers">Mood</router-link> |
-  <!--       <router-link to="/journals">Journal</router-link> | -->
-        <router-link to="/logout">Logout</router-link>
-        </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div style="height:150px"></div>
-      <div class="fluid-wrapper">
-        <!-- IFRAME MAPS -->
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.0326002286824!2d-87.63698318412354!3d41.892155979221016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e2cb444f646c9%3A0x51d21ac980a50276!2s215+W+Ohio+St+%23300%2C+Chicago%2C+IL+60654!5e0!3m2!1sen!2sus!4v1542127231471" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-        width="600" height="350" style="border:0"></iframe>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-4">
-            <br>
-            <p class="mail"> <i class="fa fa-map" aria-hidden="true"></i> &nbsp; 215 W Ohio St #300, Chicago, IL, 60654  </p>
-            <p class="mail"> <i class="fa fa-phone" aria-hidden="true"></i> &nbsp; Phone Number 773-766-5965</p>
-          </div>
-        </div>
-      </div>
-    <!-- </section> -->
-
-      <!-- FOOTER -->
-    <footer>
-      Copyrights Actualize 2018
-    </footer>
-
+<div class="mood_trackers">
+  <div>
+    Emotion: <input v-model="newMoodTracker.emotion">
+    Because: <input v-model="newMoodTracker.proud_message">
+    <button class="btn btn-warning" v-on:click="addMoodTracker()">Add</button>
   </div>
+  
+  <div v-for="moodTracker in moodTrackers">
+    <h5>{{ moodTracker.user_name }} is feeling {{ moodTracker.emotion }} because {{ moodTracker.proud_message }}
+   </h5>
+  </div>
+</div>
+
 </template>
 
-
 <style>
-
 </style>
 
+<script>
+var axios = require('axios');
+export default {
+  data: function() {
+    return {
+      moodTrackers: [],
+      newMoodTracker: {emotion: "", proud_message: ""},
+      errors: [],
+      userName: localStorage.getItem("user_name")
+    };
+  },
+  created: function() {
+    axios
+      .get("http://localhost:3000/api/mood_trackers")
+      .then(function(response) {
+        this.moodTrackers = response.data;
+      }.bind(this))
+      .catch(function(error) {
+        console.log(error.response.data.errors);
+      });
+  },
+  methods: {
+    addMoodTracker: function() {
+      this.errors = [];
+      var params = {
+        emotion: this.newMoodTracker.emotion,
+        proud_message: this.newMoodTracker.proud_message
+      };
+      axios
+        .post("http://localhost:3000/api/mood_trackers", params)
+        .then(response => {
+          location.reload();
+        })
+        .catch(error => {
+          this.error = error.response.data.errors;
+        });
+    }
+  },
+  computed: {}
+};
+</script>
