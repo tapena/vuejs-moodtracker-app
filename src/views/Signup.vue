@@ -5,6 +5,12 @@
         <h1>Signup</h1>
         <ul>
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
+          <!--
+            [@drench] This form works great! I just had to replace the dash
+            characters in some places, which Vue didn't like. We should look at
+            your editor configuration and figure out why this file had "v‐for"
+            instead of "v-for" here.
+          -->
         </ul>
         <div class="form-group">
           <label>Name:</label>
